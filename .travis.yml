@@ -8,4 +8,17 @@ before_install:
 script:
 #    - docker run mangilal23/docker-react npm run test -- --coverage
     - docker run -e CI=true mangilal23/docker-react npm run test
+deploy
+    edge: true
+    provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "deer"
+    env: "Deer-env"
+    bucket_name: "elasticbeanstalk-us-east-2-491320997429"
+    bucket_path: "deer"
+    on:
+        branch: masters
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+        secure: "$AWS_SECRET_KEY"
 
